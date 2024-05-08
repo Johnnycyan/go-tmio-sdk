@@ -75,6 +75,11 @@ var mutex = &sync.Mutex{}
 const cacheDuration = time.Hour * 48
 
 func getCachedPlayerInfo(key string) (*PlayerInfo, bool) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in getCachedPlayerInfo", r)
+		}
+	}()
 	mutex.Lock()
 	defer mutex.Unlock()
 
@@ -90,6 +95,11 @@ func getCachedPlayerInfo(key string) (*PlayerInfo, bool) {
 }
 
 func fetchPlayerInfo(playerName string) ([]PlayerInfo, error) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in fetchPlayerInfo", r)
+		}
+	}()
 	err := godotenv.Load()
 	if err != nil {
 		return nil, err
@@ -122,6 +132,11 @@ func fetchPlayerInfo(playerName string) ([]PlayerInfo, error) {
 }
 
 func GetPlayerID(playerName string) (string, error) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in GetPlayerID", r)
+		}
+	}()
 	if data, found := getCachedPlayerInfo(playerName); found {
 		return data.Player.ID, nil
 	}
@@ -139,6 +154,11 @@ func GetPlayerID(playerName string) (string, error) {
 }
 
 func GetFormattedName(playerName string) (string, error) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in GetFormattedName", r)
+		}
+	}()
 	if data, found := getCachedPlayerInfo(playerName); found {
 		return data.Player.Name, nil
 	}
