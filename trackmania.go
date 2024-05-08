@@ -146,6 +146,10 @@ func GetPlayerID(playerName string) (string, error) {
 		return "", err
 	}
 
+	if len(results) == 0 {
+		return "", fmt.Errorf("player not found")
+	}
+
 	mutex.Lock()
 	cache[playerName] = &cacheEntry{data: results[0], timestamp: time.Now()}
 	mutex.Unlock()
