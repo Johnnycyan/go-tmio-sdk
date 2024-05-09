@@ -30,7 +30,7 @@ The go-tmio-sdk project is a robust open-source toolkit designed to streamline i
 
 * **Internet**
 
-###  Acquiring with Go
+###  Setting it Up
 
 > 1. go get the package:
 > ```console
@@ -41,6 +41,10 @@ The go-tmio-sdk project is a robust open-source toolkit designed to streamline i
 > import (
 >   tmio "github.com/Johnnycyan/go-tmio-sdk"
 > )
+> ```
+> 3. Create a .env file for your project with:
+> ```
+> NAME=<your-username>
 > ```
 
 ###  Usage
