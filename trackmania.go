@@ -178,3 +178,44 @@ func GetFormattedName(playerName string) (string, error) {
 
 	return results[0].Player.Name, nil
 }
+
+func GetPlayerCampaignRank(playerName string, campaign string) (int, error) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in GetPlayerCampaignRank", r)
+		}
+	}()
+	playerID, err := GetPlayerID(playerName)
+	if err != nil {
+		return 0, err
+	}
+
+	campaignResults, err := SearchCampaigns(campaign)
+	if err != nil {
+		fmt.Println(err)
+		return 0, err
+	}
+
+	leaderboardID, err := FetchCampaignLeaderboardID(campaignResults[0].ID)
+	if err != nil {
+		fmt.Println(err)
+		return 0, err
+	}
+
+	for i := 0; i < 5; i++ {
+		offset := i * 100
+		leaderboards, err := FetchLeaderboardData(leaderboardID, offset)
+		if err != nil {
+			fmt.Println(err)
+			return 0, err
+		}
+
+		for _, top := range leaderboards.Tops {
+			if top.Player.ID == playerID {
+				return top.Position, nil
+			}
+		}
+	}
+
+	return 0, fmt.Errorf("player not found in leaderboard top 500")
+}
