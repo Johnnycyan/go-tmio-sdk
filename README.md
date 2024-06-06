@@ -11,6 +11,7 @@
 	<img src="https://img.shields.io/github/last-commit/Johnnycyan/go-tmio-sdk?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/Johnnycyan/go-tmio-sdk?style=default&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/Johnnycyan/go-tmio-sdk?style=default&color=0080ff" alt="repo-language-count">
+	<img src="https://goreportcard.com/badge/github.com/Johnnycyan/go-tmio-sdk" alt="go-report-card">
 <p>
 <p align="center">
 	<!-- default option, no dependency badges. -->
